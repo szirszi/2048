@@ -11,61 +11,73 @@
     <tr>
         <th></th>
         <th>
+            <span class="button-small">
             <a href="/reset">
                 RESTART
             </a>
+            </span>
             &nbsp;
+            <span class="button-small">
             <a href="/undo">
-                UNDO
+                UNDO LAST MOVE
             </a>
+            </span>
 
         </th>
         <th></th>
     </tr>
     <tr>
-        <th colspan="3">2048 Clone by MSz</th>
+        <th colspan="3">
+            2048 Clone by MSz<br>
+            <span th:text="${status}"></span>
+        </th>
     </tr>
     </thead>
-    <tr></tr>
-    <td></td>
-    <td>
-        <a href="/move/up">
-            <button class="horizontal-button">&uarr;</button>
-        </a>
-    </td>
-    <td></td>
-    <tr></tr>
-    <td>
-        <a href="/move/left">
-            <button class="vertical-button">&larr;</button>
-        </a>
-    </td>
-    <td>
-        <table>
-            <tr th:each="row, y:${board.getBoard()}">
-                <td th:each="column, x:${board.getBoard()}" class="cell"
-                    th:classappend="|cell${board.getElementXY(x.index,y.index)}|">
-                    <span th:text="${board.getElementXY(x.index,y.index)}"></span>
-                </td>
-            </tr>
-        </table>
-    </td>
-    <td>
-        <a href="/move/right">
-            <button class="vertical-button">&rarr;</button>
-        </a>
-    </td>
+    <tr>
+        <td></td>
+        <td>
+            <a href="/move/up">
+                <button class="horizontal-button" th:classappend="${board.canMoveUp() ? '' : 'disabled-button'}">&uarr;
+                </button>
+            </a>
+        </td>
+        <td></td>
     </tr>
-    <tr></tr>
-    <td></td>
-    <td>
-        <a href="/move/down">
-            <button class="horizontal-button">&darr;</button>
-        </a>
-    </td>
-    <td></td>
-    <tr></tr>
-
+    <tr>
+        <td>
+            <a href="/move/left">
+                <button class="vertical-button" th:classappend="${board.canMoveLeft() ? '' : 'disabled-button'}">&larr;
+                </button>
+            </a>
+        </td>
+        <td>
+            <table>
+                <tr th:each="row, y:${board.getBoard()}">
+                    <td th:each="column, x:${board.getBoard()}" class="cell"
+                        th:classappend="|cell${board.getElementXY(x.index,y.index)}|">
+                        <span th:text="${board.getElementXY(x.index,y.index)}"></span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <a href="/move/right">
+                <button class="vertical-button" th:classappend="${board.canMoveRight() ? '' : 'disabled-button'}">&rarr;
+                </button>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <a href="/move/down">
+                <button class="horizontal-button" th:classappend="${board.canMoveDown() ? '' : 'disabled-button'}">
+                    &darr;
+                </button>
+            </a>
+        </td>
+        <td></td>
+    </tr>
 </table>
 </body>
 </html>
