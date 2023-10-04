@@ -19,30 +19,41 @@ td a:hover {
     width: 320px;
     height: 80px;
 }
-button {
+button, .button-small {
     font-size: xx-large;
     background-color: mediumseagreen;
     border: 1px solid mediumseagreen;
     border-radius: 10px;
+    box-shadow: lightgrey 0 1px 2px 3px;
     text-align: center;
 }
 
-.updown, .leftright {
-    border-radius: 10px;
-    border: 1px solid black;
-    text-align: center;
-    background-color: mediumseagreen;
+a, .button-small {
+    font-size: unset;
+    margin: 5px;
+    padding: 5px;
+    color: black;
+    text-decoration: none;
 }
 
-.updown {
-    height: 80px;
+button:hover {
+    color: white;
+    box-shadow: lightgrey 0 0 1px 2px;
 }
 
-.leftright {
-    width: 80px;
-
+a:hover {
+    color: white;
 }
 
+.button-small:hover {
+    color: white;
+    box-shadow: lightgrey 0 0 1px 2px;
+}
+
+.disabled-button {
+    background-color: #CCCCCC;
+    text-line-through: single;
+}
 
 .cell {
     height: 80px;
@@ -51,101 +62,92 @@ button {
     text-align: center;
     border-radius: 10px;
     font-size: large;
+    box-shadow: lightgrey 0 1px 2px 3px;
 }
 
 .cell0, .cell2, .cell4, .cell8, .cell16, .cell32, .cell64 {
     font-size: xxx-large;
+    color: white;
 }
 
 .cell128, .cell256, .cell512 {
     font-size: xx-large;
+    color: black;
 }
 
 .cell1024, .cell2048, .cell4096, .cell8192, .cell16384, .cell32768, .cell65536 {
     font-size: x-large;
+    color: black;
+}
+
+.cell8192, .cell16384, .cell32768, .cell65536 {
+    background-color: #FFF;
 }
 
 .cell0 {
     background-color: #FFF;
-    color: white;
 }
 
 .cell2 {
     background-color: #333;
-    color: white;
 }
 
 .cell4 {
     background-color: #444;
-    color: white;
 }
 
 .cell8 {
     background-color: #555;
-    color: white;
 }
 
 .cell16 {
     background-color: #666;
-    color: white;
 }
 
 .cell32 {
     background-color: #777;
-    color: black;
 }
 
 .cell64 {
     background-color: #888;
-    color: black;
 }
 
 .cell128 {
     background-color: #999;
-    color: black;
 }
 
 .cell256 {
     background-color: #AAA;
-    color: black;
 }
 
 .cell512 {
     background-color: #BBB;
-    color: black;
 }
 
 .cell1024 {
     background-color: #CCC;
-    color: black;
 }
 
 .cell2048 {
     background-color: #DDD;
-    color: black;
 }
 
 .cell4096 {
     background-color: #EEE;
-    color: black;
 }
 
 .cell8192 {
-    background-color: #FFF;
     color: #111;
 }
 
 .cell16384 {
-    background-color: #FFF;
     color: #222;
 }
 
 .cell32768 {
-    background-color: #FFF;
     color: #333;
 }
 
 .cell65536 {
-    background-color: #FFF;
     color: #444;
 }
