@@ -1,0 +1,151 @@
+
+body {
+    font-family: sans-serif;
+}
+
+td a {display: block;
+    position: relative;
+    text-align: center;
+}
+
+td a:hover {
+}
+.vertical-button {
+    width: 80px;
+    height: 320px;
+}
+
+.horizontal-button{
+    width: 320px;
+    height: 80px;
+}
+button {
+    font-size: xx-large;
+    background-color: mediumseagreen;
+    border: 1px solid mediumseagreen;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.updown, .leftright {
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    background-color: mediumseagreen;
+}
+
+.updown {
+    height: 80px;
+}
+
+.leftright {
+    width: 80px;
+
+}
+
+
+.cell {
+    height: 80px;
+    width: 80px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 10px;
+    font-size: large;
+}
+
+.cell0, .cell2, .cell4, .cell8, .cell16, .cell32, .cell64 {
+    font-size: xxx-large;
+}
+
+.cell128, .cell256, .cell512 {
+    font-size: xx-large;
+}
+
+.cell1024, .cell2048, .cell4096, .cell8192, .cell16384, .cell32768, .cell65536 {
+    font-size: x-large;
+}
+
+.cell0 {
+    background-color: #FFF;
+    color: white;
+}
+
+.cell2 {
+    background-color: #333;
+    color: white;
+}
+
+.cell4 {
+    background-color: #444;
+    color: white;
+}
+
+.cell8 {
+    background-color: #555;
+    color: white;
+}
+
+.cell16 {
+    background-color: #666;
+    color: white;
+}
+
+.cell32 {
+    background-color: #777;
+    color: black;
+}
+
+.cell64 {
+    background-color: #888;
+    color: black;
+}
+
+.cell128 {
+    background-color: #999;
+    color: black;
+}
+
+.cell256 {
+    background-color: #AAA;
+    color: black;
+}
+
+.cell512 {
+    background-color: #BBB;
+    color: black;
+}
+
+.cell1024 {
+    background-color: #CCC;
+    color: black;
+}
+
+.cell2048 {
+    background-color: #DDD;
+    color: black;
+}
+
+.cell4096 {
+    background-color: #EEE;
+    color: black;
+}
+
+.cell8192 {
+    background-color: #FFF;
+    color: #111;
+}
+
+.cell16384 {
+    background-color: #FFF;
+    color: #222;
+}
+
+.cell32768 {
+    background-color: #FFF;
+    color: #333;
+}
+
+.cell65536 {
+    background-color: #FFF;
+    color: #444;
+}
