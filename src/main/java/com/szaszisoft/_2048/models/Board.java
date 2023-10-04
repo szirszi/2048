@@ -61,9 +61,9 @@ public class Board {
     return false;
   }
 
-  public Board addNewNumber(Integer number) {
+  public void addNewNumber(Integer number) {
     if (allContainsNumber()) {
-      return this;
+      return;
     }
     int x;
     int y;
@@ -74,18 +74,18 @@ public class Board {
       y = (y < 0 ? 0 : (y >= size ? size - 1 : y));
     } while (getElementXY(x, y) != 0);
     setElementXY(x, y, number);
-    return this;
   }
 
   public String representAsString() {
-    String boardAsString = "";
+    StringBuilder boardAsString = new StringBuilder();
     for (int y = 0; y < size; y++) {
       for (int x = 0; x < size; x++) {
-        boardAsString += "" + getElementXY(x, y);
+        boardAsString.append(getElementXY(x, y));
+        boardAsString.append("\t\t");
       }
-      boardAsString += "\n";
+      boardAsString.append("\n");
     }
-    return boardAsString;
+    return boardAsString.toString();
   }
 
   public boolean canMoveUp() {
@@ -103,7 +103,7 @@ public class Board {
   }
 
   public boolean canMoveDown() {
-    boolean canMoveDown = false;
+    boolean canMoveDown;
     rotateLeft();
     rotateLeft();
     canMoveDown = canMoveUp();
@@ -111,8 +111,9 @@ public class Board {
     rotateLeft();
     return canMoveDown;
   }
+
   public boolean canMoveLeft() {
-    boolean canMoveLeft = false;
+    boolean canMoveLeft;
     rotateLeft();
     rotateLeft();
     rotateLeft();
@@ -120,8 +121,9 @@ public class Board {
     rotateLeft();
     return canMoveLeft;
   }
+
   public boolean canMoveRight() {
-    boolean canMoveRight = false;
+    boolean canMoveRight;
     rotateLeft();
     canMoveRight = canMoveUp();
     rotateLeft();
@@ -129,6 +131,7 @@ public class Board {
     rotateLeft();
     return canMoveRight;
   }
+
   public void moveUp() {
     for (int x = 0; x < size; x++) {
       List<Integer> tempList = new ArrayList<>();
@@ -153,6 +156,7 @@ public class Board {
     }
     addNewNumber(2);
   }
+
   public void moveDown() {
     rotateLeft();
     rotateLeft();
@@ -160,6 +164,7 @@ public class Board {
     rotateLeft();
     rotateLeft();
   }
+
   public void moveLeft() {
 
     rotateLeft();
@@ -168,6 +173,7 @@ public class Board {
     moveUp();
     rotateLeft();
   }
+
   public void moveRight() {
     rotateLeft();
     moveUp();
@@ -175,6 +181,7 @@ public class Board {
     rotateLeft();
     rotateLeft();
   }
+
   public void rotateLeft() {
     Integer[][] current = getBoard();
     Integer[][] leftRotated = new Integer[size][size];
@@ -184,7 +191,6 @@ public class Board {
       }
     }
     board = leftRotated;
-    System.out.println(representAsString());
   }
 
   public void populate(Board otherBoard) {
