@@ -19,8 +19,8 @@ jobs:
       - uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ szirszi }}
-          password: ${{ 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 }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           name: Build the 2048 Docker image
           run: |
                 docker run ghcr.io/szirszi/2048:latest
