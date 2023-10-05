@@ -22,5 +22,5 @@ jobs:
       - name: Build the Docker image
         run: |
               docker build . --file Dockerfile --tag ghcr.io/szirszi/2048:latest
-              docker run ghcr.io/szirszi/2048:latest
-              docker run ghcr.io/szirszi/2048:latest
+              docker push ghcr.io/szirszi/2048:latest
+          
