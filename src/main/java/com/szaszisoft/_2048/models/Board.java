@@ -2,31 +2,71 @@ package com.szaszisoft._2048.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+//@Entity
 public class Board {
-  private Integer[][] board;
+//  @Id
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+//  @OneToMany(mappedBy = "board", orphanRemoval = true, cascade = CascadeType.ALL)
+  private List<BoardRow> playBoard;
   private Integer size;
 
   public Board() {
+    playBoard = new ArrayList<>();
   }
 
   public Board(Integer size) {
+    playBoard = new ArrayList<>();
     this.size = size;
-    board = new Integer[size][size];
+/*
+    Integer[][] playBoardArray = new Integer[size][size];
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < size; j++) {
-        board[i][j] = 0;
+        playBoardArray[i][j] = 0;
       }
     }
+    playBoard = arrayToPlayBoard(playBoardArray);
+*/
+
+
+    for (int y = 0; y < size; y++) {
+      List<Integer> rowContent = new ArrayList<>();
+      for (int x = 0; x < size; x++) {
+        rowContent.add(0);
+      }
+      BoardRow boardRow = new BoardRow(rowContent, size, this);
+      playBoard.add(boardRow);
+    }
     addNewNumber(2);
+
   }
 
-  public Integer[][] getBoard() {
-    return board;
+  public List<BoardRow> getPlayBoard() {
+    return playBoard;
   }
 
-  public void setBoard(Integer[][] board) {
-    this.board = board;
+  public void setPlayBoard(List<BoardRow> playBoard) {
+    this.playBoard = playBoard;
+  }
+
+  public void setPlayBoardFromArray(List<BoardRow> playBoard) {
+    this.playBoard = playBoard;
+  }
+
+  public Integer[][] getPlayBoardAsArray() {
+    return this.playBoardTo2DArray();
+  }
+
+  public void setPlayBoardFromArray(Integer[][] playBoard) {
+
+    this.playBoard = arrayToPlayBoard(playBoard);
   }
 
   public Integer getSize() {
@@ -38,17 +78,17 @@ public class Board {
   }
 
   public Integer getElementXY(Integer x, Integer y) {
-    return board[y][x];
+    return playBoard.get(y).getRowItem(x);
   }
 
   public void setElementXY(Integer x, Integer y, Integer value) {
-    board[y][x] = value;
+    playBoard.get(y).setRowItem(x, value);
   }
 
   boolean allContainsNumber() {
     int i = 0;
     int j = 0;
-    while (board[i][j] != 0) {
+    while (getElementXY(i, j) != 0) {
       i++;
       if (i >= size) {
         i = 0;
@@ -183,14 +223,14 @@ public class Board {
   }
 
   public void rotateLeft() {
-    Integer[][] current = getBoard();
+    Integer[][] current = getPlayBoardAsArray();
     Integer[][] leftRotated = new Integer[size][size];
     for (int y = 0; y < size; y++) {
       for (int x = 0; x < size; x++) {
         leftRotated[y][x] = current[x][size - 1 - y];
       }
     }
-    board = leftRotated;
+    playBoard = arrayToPlayBoard(leftRotated);
   }
 
   public void populate(Board otherBoard) {
@@ -199,5 +239,36 @@ public class Board {
         setElementXY(x, y, otherBoard.getElementXY(x, y));
       }
     }
+  }
+
+  public Integer[][] playBoardTo2DArray() {
+    Integer[][] outputArray = new Integer[size][size];
+    for (int y = 0; y < size; y++) {
+      BoardRow currentRow = playBoard.get(y);
+      for (int x = 0; x < size; x++) {
+        outputArray[y][x] = currentRow.getRow().get(x);
+      }
+
+    }
+    return outputArray;
+  }
+
+  public Board arrayToBoard(Integer[][] boardAsArray) {
+    for (int y = 0; y < size; y++) {
+      BoardRow currentRow = playBoard.get(y);
+      for (int x = 0; x < size; x++) {
+        currentRow.setRowItem(x, boardAsArray[y][x]);
+      }
+      playBoard.set(y, currentRow);
+    }
+    return this;
+  }
+
+  public List<BoardRow> arrayToPlayBoard(Integer[][] boardAsArray) {
+    Board board = arrayToBoard(boardAsArray);
+    return board.getPlayBoard();
+  }
+  public void addRowToPlayBoard(BoardRow boardRow) {
+    playBoard.add(boardRow);
   }
 }
