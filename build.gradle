@@ -34,10 +34,17 @@ task extractDependencies(type: Copy) {
 }
 */
 
+tasks.named("bootJar") {
+	launchScript()
+}
+
+
+/*
 task unpackFatJar(type: Copy) {
 	from zipTree("$buildDir/libs/_2048-0.0.1-SNAPSHOT.jar") // Replace 'your-application.jar' with the name of your fat JAR
 	into file("$buildDir/dependency")
 }
+*/
 
 /*
 
@@ -48,11 +55,8 @@ tasks.named("bootJar") {
 tasks.named("jar") {
 	archiveClassifier = ''
 }
-
-tasks.named("bootJar") {
-	launchScript()
-}
-
+*/
+/*
 tasks.named("bootBuildImage") {
 	builder = "mine/java-cnb-builder"
 	runImage = "mine/java-cnb-run"
