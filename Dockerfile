@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jre-alpine
-EXPOSE 80/tcp
-EXPOSE 80/udp
+EXPOSE 8080/tcp
+EXPOSE 8080/udp
 VOLUME /tmp
 COPY --chown=node:node build/libs/*.jar app.jar
 ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app.jar ${0} ${@}"]

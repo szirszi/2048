@@ -32,13 +32,14 @@ task extractDependencies(type: Copy) {
 	from configurations.runtimeClasspath
 	into "$buildDir/dependency"
 }
+*/
 
 task unpackFatJar(type: Copy) {
 	from zipTree("$buildDir/libs/_2048-0.0.1-SNAPSHOT.jar") // Replace 'your-application.jar' with the name of your fat JAR
 	into file("$buildDir/dependency")
 }
 
-
+/*
 
 tasks.named("bootJar") {
 	archiveClassifier = 'boot'
