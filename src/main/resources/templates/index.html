@@ -52,8 +52,8 @@
         </td>
         <td>
             <table>
-                <tr th:each="row, y:${board.getBoard()}">
-                    <td th:each="column, x:${board.getBoard()}" class="cell"
+                <tr th:each="row, y:${board.getPlayBoardAsArray()}">
+                    <td th:each="column, x:${board.getPlayBoardAsArray()}" class="cell"
                         th:classappend="|cell${board.getElementXY(x.index,y.index)}|">
                         <span th:text="${board.getElementXY(x.index,y.index)}"></span>
                     </td>
