@@ -1,6 +1,13 @@
 package com.szaszisoft._2048.controllers;
 
 import com.szaszisoft._2048.models.Board;
+/*
+import com.szaszisoft._2048.repositories.BoardRepository;
+import com.szaszisoft._2048.repositories.BoardRowRepository;
+*/
+import com.szaszisoft._2048.services.BoardRowService;
+import com.szaszisoft._2048.services.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +16,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class WebController {
+/*
+  private final BoardService boardService;
+  private final BoardRowService boardRowService;
+  private final BoardRepository boardRepository;
+  private final BoardRowRepository boardRowRepository;
+*/
+
   private Board board = new Board(4);
   private Board previous = new Board(4);
+/*
+  @Autowired
+  public WebController(BoardService boardService, BoardRowService boardRowService,
+                       BoardRepository boardRepository, BoardRowRepository boardRowRepository) {
+    this.boardService = boardService;
+    this.boardRowService = boardRowService;
+    this.boardRepository = boardRepository;
+    this.boardRowRepository = boardRowRepository;
+  }
+*/
 
   @GetMapping("/")
   public String getBoard(Model model) {
