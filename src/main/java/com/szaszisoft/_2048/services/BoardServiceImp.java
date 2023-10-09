@@ -16,7 +16,7 @@ public class BoardServiceImp implements BoardService {
 
   @Override
   public Board initializeBoard(Integer size) {
-    Board board = new Board(4);
+    Board board = new Board(size);
   return boardRepository.save(board);
   }
 
