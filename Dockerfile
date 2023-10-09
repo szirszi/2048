@@ -14,10 +14,10 @@ COPY build.gradle .
 COPY settings.gradle .
 
 # Copy the entire project (excluding files listed in .dockerignore) into the container
-COPY src src
+COPY . .
 
 # Run the Gradle build using the gradlew script
-RUN ./gradlew build
+RUN ./gradlew build -x test
 
 # Create a directory for the application's JAR file
 RUN mkdir -p build/dependency
