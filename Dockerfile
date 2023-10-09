@@ -6,7 +6,7 @@ WORKDIR /workspace/app
 
 # Copy the Gradle wrapper files (gradlew and gradle-wrapper.properties)
 COPY gradlew .
-RUN chmod +x ./gradlew
+RUN chmod +x gradlew
 COPY gradle/wrapper/gradle-wrapper.properties gradle/wrapper/
 
 # Copy the Gradle build files (build.gradle and settings.gradle)
@@ -17,7 +17,7 @@ COPY settings.gradle .
 COPY . .
 
 # Run the Gradle build using the gradlew script
-RUN ./gradlew build -x test
+RUN ./gradlew build
 
 # Create a directory for the application's JAR file
 RUN mkdir -p build/dependency
