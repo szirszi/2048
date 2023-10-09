@@ -6,6 +6,7 @@ WORKDIR /workspace/app
 
 # Copy the Gradle wrapper files (gradlew and gradle-wrapper.properties)
 COPY gradlew .
+RUN chmod +x ./gradlew
 COPY gradle/wrapper/gradle-wrapper.properties gradle/wrapper/
 
 # Copy the Gradle build files (build.gradle and settings.gradle)
