@@ -19,35 +19,32 @@ public class Board {
   private Integer size;
 
   public Board() {
-    playBoard = new ArrayList<>();
+    playBoard = new ArrayList<BoardRow>();
   }
 
   public Board(Integer size) {
     playBoard = new ArrayList<BoardRow>();
     this.size = size;
-/*
-    Integer[][] playBoardArray = new Integer[size][size];
-    for (int i = 0; i < size; i++) {
-      for (int j = 0; j < size; j++) {
-        playBoardArray[i][j] = 0;
-      }
-    }
-    playBoard = arrayToPlayBoard(playBoardArray);
-*/
-
-
     for (int y = 0; y < size; y++) {
-      List<BoardCell> rowContent = new ArrayList<>();
+      BoardRow boardRow = new BoardRow(new ArrayList<BoardCell>(), size, this);
       for (int x = 0; x < size; x++) {
         BoardCell boardCell = new BoardCell();
+        boardCell.setBoardRow(boardRow);
         boardCell.setCellValue(0);
-        rowContent.add(boardCell);
+        boardRow.addToRow(boardCell);
       }
-      BoardRow boardRow = new BoardRow(rowContent, size, this);
       playBoard.add(boardRow);
     }
     addNewNumber(2);
 
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public List<BoardRow> getPlayBoard() {
