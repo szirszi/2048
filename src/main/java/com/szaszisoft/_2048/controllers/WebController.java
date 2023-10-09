@@ -1,7 +1,10 @@
 package com.szaszisoft._2048.controllers;
 
 import com.szaszisoft._2048.models.Board;
+import com.szaszisoft._2048.models.BoardType;
+import com.szaszisoft._2048.models.Game;
 import com.szaszisoft._2048.services.BoardService;
+import com.szaszisoft._2048.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,23 +15,28 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class WebController {
   private final BoardService boardService;
+  private final GameService gameService;
 
   @Autowired
-  public WebController(BoardService boardService) {
+  public WebController(BoardService boardService, GameService gameService) {
     this.boardService = boardService;
+    this.gameService = gameService;
   }
 
   @GetMapping("/")
   public String getBoard(Model model) {
-    Board board = boardService.getBoardById(1L);
+    Game game = gameService.getGameById(1L);
+    Board board = selectBoard(game, BoardType.PLAY);
     model.addAttribute("board", board);
     return "index";
   }
 
   @GetMapping("/move/{id}")
   public String getMoveBoard(@PathVariable String id, RedirectAttributes redirectAttributes) {
-    Board board = boardService.getBoardById(1L);
-    Board previous = boardService.getBoardById(2L);
+    Game game = gameService.getGameById(1L);
+    Board board = selectBoard(game, BoardType.PLAY);
+    Board previous = selectBoard(game, BoardType.UNDO);
+
     if (id.equals("up") && board.canMoveUp()) {
       previous.populate(board);
       board.moveUp();
@@ -60,8 +68,9 @@ public class WebController {
 
   @GetMapping("/reset")
   public String getReset() {
-    Board board = boardService.getBoardById(1L);
-    Board previous = boardService.getBoardById(2L);
+    Game game = gameService.getGameById(1L);
+    Board board = selectBoard(game, BoardType.PLAY);
+    Board previous = selectBoard(game, BoardType.UNDO);
     previous.populate(board);
     boardService.save(previous);
     board = boardService.resetBoard(board);
@@ -70,10 +79,17 @@ public class WebController {
 
   @GetMapping("/undo")
   public String getUndo() {
-    Board board = boardService.getBoardById(1L);
-    Board previous = boardService.getBoardById(2L);
+    Game game = gameService.getGameById(1L);
+    Board board = selectBoard(game, BoardType.PLAY);
+    Board previous = selectBoard(game, BoardType.UNDO);
     board.populate(previous);
     boardService.save(board);
     return "redirect:/";
+  }
+
+  private Board selectBoard(Game game, BoardType boardType) {
+    return game.getBoards().stream()
+        .filter(b -> b.getBoardType() == boardType)
+        .findFirst().orElse(null);
   }
 }
