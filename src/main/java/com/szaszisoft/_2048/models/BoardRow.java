@@ -3,7 +3,6 @@ package com.szaszisoft._2048.models;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +22,7 @@ public class BoardRow {
   private Board board;
 
   public BoardRow() {
+    row = new ArrayList<BoardCell>();
   }
 
   public BoardRow(List<BoardCell> row, Integer size, Board board) {
