@@ -56,10 +56,10 @@ tasks.named("jar") {
 	archiveClassifier = ''
 }
 */
-/*
+
 tasks.named("bootBuildImage") {
 	builder = "mine/java-cnb-builder"
 	runImage = "mine/java-cnb-run"
 }
-*/
+
 
