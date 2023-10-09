@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -16,7 +17,10 @@ public class Board {
   private Long id;
   @OneToMany(mappedBy = "board", orphanRemoval = true, cascade = CascadeType.ALL)
   private List<BoardRow> playBoard;
+  @ManyToOne
+  private Game game;
   private Integer size;
+  private BoardType boardType;
 
   public Board() {
     playBoard = new ArrayList<BoardRow>();
@@ -74,6 +78,22 @@ public class Board {
 
   public void setSize(Integer size) {
     this.size = size;
+  }
+
+  public Game getGame() {
+    return game;
+  }
+
+  public void setGame(Game game) {
+    this.game = game;
+  }
+
+  public BoardType getBoardType() {
+    return boardType;
+  }
+
+  public void setBoardType(BoardType boardType) {
+    this.boardType = boardType;
   }
 
   public Integer getElementXY(Integer x, Integer y) {
