@@ -1,11 +1,6 @@
 package com.szaszisoft._2048.controllers;
 
 import com.szaszisoft._2048.models.Board;
-/*
-import com.szaszisoft._2048.repositories.BoardRepository;
-import com.szaszisoft._2048.repositories.BoardRowRepository;
-*/
-import com.szaszisoft._2048.services.BoardRowService;
 import com.szaszisoft._2048.services.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,34 +11,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class WebController {
-/*
   private final BoardService boardService;
-  private final BoardRowService boardRowService;
-  private final BoardRepository boardRepository;
-  private final BoardRowRepository boardRowRepository;
-*/
 
-  private Board board = new Board(4);
-  private Board previous = new Board(4);
-/*
   @Autowired
-  public WebController(BoardService boardService, BoardRowService boardRowService,
-                       BoardRepository boardRepository, BoardRowRepository boardRowRepository) {
+  public WebController(BoardService boardService) {
     this.boardService = boardService;
-    this.boardRowService = boardRowService;
-    this.boardRepository = boardRepository;
-    this.boardRowRepository = boardRowRepository;
   }
-*/
 
   @GetMapping("/")
   public String getBoard(Model model) {
+    Board board = boardService.getBoardById(1L);
     model.addAttribute("board", board);
     return "index";
   }
 
   @GetMapping("/move/{id}")
   public String getMoveBoard(@PathVariable String id, RedirectAttributes redirectAttributes) {
+    Board board = boardService.getBoardById(1L);
+    Board previous = boardService.getBoardById(2L);
     if (id.equals("up") && board.canMoveUp()) {
       previous.populate(board);
       board.moveUp();
@@ -68,18 +53,27 @@ public class WebController {
         !board.canMoveDown()) {
       redirectAttributes.addFlashAttribute("status", "No more move. Game over.");
     }
+    boardService.save(board);
+    boardService.save(previous);
     return "redirect:/";
   }
 
   @GetMapping("/reset")
   public String getReset() {
-    board = new Board(4);
+    Board board = boardService.getBoardById(1L);
+    Board previous = boardService.getBoardById(2L);
+    previous.populate(board);
+    boardService.save(previous);
+    board = boardService.resetBoard(board);
     return "redirect:/";
   }
 
   @GetMapping("/undo")
   public String getUndo() {
+    Board board = boardService.getBoardById(1L);
+    Board previous = boardService.getBoardById(2L);
     board.populate(previous);
+    boardService.save(board);
     return "redirect:/";
   }
 }
