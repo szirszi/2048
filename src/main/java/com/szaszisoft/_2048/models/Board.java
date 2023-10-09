@@ -9,12 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-//@Entity
+@Entity
 public class Board {
-//  @Id
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-//  @OneToMany(mappedBy = "board", orphanRemoval = true, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "board", orphanRemoval = true, cascade = CascadeType.ALL)
   private List<BoardRow> playBoard;
   private Integer size;
 
@@ -23,7 +23,7 @@ public class Board {
   }
 
   public Board(Integer size) {
-    playBoard = new ArrayList<>();
+    playBoard = new ArrayList<BoardRow>();
     this.size = size;
 /*
     Integer[][] playBoardArray = new Integer[size][size];
@@ -37,9 +37,11 @@ public class Board {
 
 
     for (int y = 0; y < size; y++) {
-      List<Integer> rowContent = new ArrayList<>();
+      List<BoardCell> rowContent = new ArrayList<>();
       for (int x = 0; x < size; x++) {
-        rowContent.add(0);
+        BoardCell boardCell = new BoardCell();
+        boardCell.setCellValue(0);
+        rowContent.add(boardCell);
       }
       BoardRow boardRow = new BoardRow(rowContent, size, this);
       playBoard.add(boardRow);
@@ -78,11 +80,13 @@ public class Board {
   }
 
   public Integer getElementXY(Integer x, Integer y) {
-    return playBoard.get(y).getRowItem(x);
+    return playBoard.get(y).getRowItem(x).getCellValue();
   }
 
   public void setElementXY(Integer x, Integer y, Integer value) {
-    playBoard.get(y).setRowItem(x, value);
+    BoardRow boardRow = playBoard.get(y);
+    BoardCell rowItem = boardRow.getRowItem(x);
+    rowItem.setCellValue(value);
   }
 
   boolean allContainsNumber() {
@@ -246,7 +250,7 @@ public class Board {
     for (int y = 0; y < size; y++) {
       BoardRow currentRow = playBoard.get(y);
       for (int x = 0; x < size; x++) {
-        outputArray[y][x] = currentRow.getRow().get(x);
+        outputArray[y][x] = currentRow.getRow().get(x).getCellValue();
       }
 
     }
@@ -257,7 +261,8 @@ public class Board {
     for (int y = 0; y < size; y++) {
       BoardRow currentRow = playBoard.get(y);
       for (int x = 0; x < size; x++) {
-        currentRow.setRowItem(x, boardAsArray[y][x]);
+        BoardCell rowItem = currentRow.getRowItem(x);
+        rowItem.setCellValue(boardAsArray[y][x]);
       }
       playBoard.set(y, currentRow);
     }
@@ -268,6 +273,7 @@ public class Board {
     Board board = arrayToBoard(boardAsArray);
     return board.getPlayBoard();
   }
+
   public void addRowToPlayBoard(BoardRow boardRow) {
     playBoard.add(boardRow);
   }

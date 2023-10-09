@@ -2,28 +2,30 @@ package com.szaszisoft._2048.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-//@Entity
+@Entity
 public class BoardRow {
-//  @Id
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-//  @ElementCollection
-  private List<Integer> row = new ArrayList<>();
+  @OneToMany(mappedBy = "boardRow", orphanRemoval = true, cascade = CascadeType.ALL)
+  private List<BoardCell> row;
   private Integer size;
-//  @ManyToOne
+  @ManyToOne
   private Board board;
 
   public BoardRow() {
   }
 
-  public BoardRow(List<Integer> row, Integer size, Board board) {
+  public BoardRow(List<BoardCell> row, Integer size, Board board) {
     this.row = row;
     this.size = size;
     this.board = board;
@@ -53,20 +55,20 @@ public class BoardRow {
     return id;
   }
 
-  public List<Integer> getRow() {
+  public List<BoardCell> getRow() {
     return row;
   }
 
-  public void setRow(List<Integer> row) {
+  public void setRow(List<BoardCell> row) {
     this.row = row;
   }
-  public void addToRow(Integer integer) {
-    row.add(integer);
+  public void addToRow(BoardCell boardCell) {
+    row.add(boardCell);
   }
-  public void setRowItem(Integer index, Integer integer) {
-    row.set(index, integer);
+  public void setRowItem(Integer index, BoardCell boardCell) {
+    row.set(index, boardCell);
   }
-  public Integer getRowItem(Integer index) {
+  public BoardCell getRowItem(Integer index) {
     return row.get(index);
   }
 }
