@@ -4,35 +4,26 @@
     <meta charset="UTF-8">
     <title>Play 2048 Clone</title>
     <link rel="stylesheet" th:href="@{styles.css}">
+    <div th:remove="tag" th:if="${board.size > 6}">
+        <link rel="stylesheet" th:href="@{styles-small.css}">
+    </div>
+
 </head>
 <body>
-<table>
+<table th:with="canMoveUp=${board.canMoveUp()}, canMoveDown=${board.canMoveDown()},
+                canMoveLeft=${board.canMoveLeft()}, canMoveRight=${board.canMoveRight()}">
     <thead>
     <tr>
         <th colspan="3">
-            <span class="button-small">
-            <a href="/">
-                SELECT GAME
-            </a>
-            </span>
-        </th>
-    </tr>
-    <tr>
-        <th colspan="3">
-            <span class="button-small">
             <a href="/reset">
-                RESTART
+                <button class="button-small">RESTART</button>
             </a>
-            </span>
-        </th>
-    </tr>
-    <tr>
-        <th colspan="3">
-            <span class="button-small">
+            <a href="/">
+                <button class="button-small">SELECT GAME</button>
+            </a>
             <a href="/undo">
-                UNDO LAST MOVE
+                <button class="button-small">UNDO LAST MOVE</button>
             </a>
-            </span>
         </th>
     </tr>
     <tr>
@@ -47,8 +38,8 @@
     <tr>
         <td></td>
         <td>
-            <a href="/move/up">
-                <button class="horizontal-button" th:classappend="${board.canMoveUp() ? '' : 'disabled-button'}">&uarr;
+            <a th:href="${canMoveUp ? '/move/up' : '#'}">
+                <button class="horizontal-button" th:classappend="${canMoveUp ? '' : 'disabled-button'}">&uarr;
                 </button>
             </a>
         </td>
@@ -56,8 +47,9 @@
     </tr>
     <tr>
         <td>
-            <a href="/move/left">
-                <button class="vertical-button" th:classappend="${board.canMoveLeft() ? '' : 'disabled-button'}">&larr;
+
+            <a th:href="${canMoveLeft ? '/move/left' : '#'}">
+                <button class="vertical-button" th:classappend="${canMoveLeft ? '' : 'disabled-button'}">&larr;
                 </button>
             </a>
         </td>
@@ -72,8 +64,8 @@
             </table>
         </td>
         <td>
-            <a href="/move/right">
-                <button class="vertical-button" th:classappend="${board.canMoveRight() ? '' : 'disabled-button'}">&rarr;
+            <a th:href="${canMoveRight ? '/move/right' : '#'}">
+                <button class="vertical-button" th:classappend="${canMoveRight ? '' : 'disabled-button'}">&rarr;
                 </button>
             </a>
         </td>
@@ -81,8 +73,8 @@
     <tr>
         <td></td>
         <td>
-            <a href="/move/down">
-                <button class="horizontal-button" th:classappend="${board.canMoveDown() ? '' : 'disabled-button'}">
+            <a th:href="${canMoveDown ? '/move/down' : '#'}">
+                <button class="horizontal-button" th:classappend="${canMoveDown ? '' : 'disabled-button'}">
                     &darr;
                 </button>
             </a>
