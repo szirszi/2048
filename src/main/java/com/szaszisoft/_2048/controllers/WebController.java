@@ -40,14 +40,13 @@ public class WebController {
   }
 
   @PostMapping("/game")
-  public String postGame(@ModelAttribute SelectGameDto selectGameDTO,
+  public String postGame(@ModelAttribute SelectGameDto selectGameDto,
                          HttpServletResponse httpServletResponse) {
-    System.out.println(selectGameDTO.getGameId());
-    Long gameId = selectGameDTO.getGameId();
-    if (gameId == 0 || gameId == null) {
-      gameId = gameService.startNewGame(selectGameDTO.getSize()).getId();
+    Long gameId = selectGameDto.getGameId();
+    if (gameId == 0) {
+      gameId = gameService.startNewGame(selectGameDto.getSize()).getId();
     }
-    Cookie cookie = new Cookie("gameid", "" + gameId);
+    Cookie cookie = new Cookie("gameId", "" + gameId);
     cookie.setHttpOnly(true);
     cookie.setPath("/");
     httpServletResponse.addCookie(cookie);
