@@ -32,9 +32,9 @@ public class WebController {
   @GetMapping("/")
   public String getMain(@CookieValue(value = "gameId", defaultValue = "0") Long gameId,
                         Model model,
-                        Game newGame) {
+                        SelectGameDto selectGameDto) {
     model.addAttribute("games", gameService.findAll());
-    model.addAttribute(newGame);
+    model.addAttribute(selectGameDto);
     model.addAttribute("gameId", gameId);
     return "index";
   }
@@ -44,7 +44,7 @@ public class WebController {
                          HttpServletResponse httpServletResponse) {
     Long gameId = selectGameDto.getGameId();
     if (gameId == 0) {
-      gameId = gameService.startNewGame(selectGameDto.getSize()).getId();
+      gameId = gameService.startNewGame(selectGameDto.getSize(), selectGameDto.getGameName()).getId();
     }
     Cookie cookie = new Cookie("gameId", "" + gameId);
     cookie.setHttpOnly(true);
@@ -76,7 +76,6 @@ public class WebController {
       return "redirect:/";
     }
     Game game = gameService.getGameById(gameId);
-
     if (game == null) {
       return "redirect:/";
     }
