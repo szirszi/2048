@@ -5,7 +5,7 @@
     <title>Start Game</title>
 </head>
 <body>
-<span th:unless="${games.size() == 0}">
+<span th:unless="${games.size() == 0}" th:remove="tag">
 <form method="POST" action="/game" th:object="${selectGameDto}">
     <label for="games">Select Game</label>
     <select th:name="gameId" id="games">
