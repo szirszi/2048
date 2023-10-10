@@ -138,7 +138,8 @@ public class WebController {
   }
 
   @GetMapping("/undo")
-  public String getUndo(@CookieValue(value = "gameId", defaultValue = "0") Long gameId) {
+  public String getUndo(@CookieValue(value = "gameId", defaultValue = "0") Long gameId,
+                        RedirectAttributes redirectAttributes) {
     if (gameId == 0) {
       return "redirect:/";
     }
@@ -151,6 +152,7 @@ public class WebController {
     Board previous = selectBoard(game, BoardType.UNDO);
     board.populate(previous);
     boardService.save(board);
+    redirectAttributes.addFlashAttribute("canUndo", 0);
     return "redirect:/game";
   }
 

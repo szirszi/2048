@@ -21,15 +21,15 @@
             <a href="/">
                 <button class="button-small">SELECT GAME</button>
             </a>
-            <a href="/undo">
-                <button class="button-small">UNDO LAST MOVE</button>
+            <a th:href="${canUndo != 0 ? '/undo' : '#'}">
+                <button class="button-small" th:classappend="${canUndo != 0 ? '' : 'disabled-button'}">UNDO LAST MOVE</button>
             </a>
         </th>
     </tr>
     <tr>
         <th colspan="3">
             <br>
-            2048 Clone by MSz (V23.10.10.19.44)
+            2048 Clone by MSz (V23.10.10.20.43)
             <br>
             <span th:text="${gameName}"></span>
             <br>
