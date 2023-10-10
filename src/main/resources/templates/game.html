@@ -60,10 +60,11 @@
         </td>
         <td>
             <table>
-                <tr th:each="row, y:${board.getPlayBoardAsArray()}">
-                    <td th:each="column, x:${board.getPlayBoardAsArray()}" class="cell"
-                        th:classappend="|cell${board.getElementXY(x.index,y.index)}|" th:id="${(x.index==newCellX && y.index==newCellY) ? 'newcell' : ''}">
-                        <span th:text="${board.getElementXY(x.index,y.index)}" th:remove="tag"></span>
+                <tr th:each="y:${#numbers.sequence(0, board.getSize() - 1)}">
+                    <td th:each="x:${#numbers.sequence(0, board.getSize() - 1)}"
+                        th:with="elementXY=${board.getElementXY(x, y)}"
+                        th:class="|cell cell${elementXY}|" th:id="${(x==newCellX && y==newCellY) ? 'newcell' : ''}">
+                        <span th:text="${elementXY}" th:remove="tag"></span>
                     </td>
                 </tr>
             </table>
