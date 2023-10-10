@@ -3,6 +3,7 @@ package com.szaszisoft._2048.dtos;
 public class SelectGameDto {
   private Long gameId;
   private Integer size;
+  private String gameName;
 
   public SelectGameDto() {
   }
@@ -25,5 +26,13 @@ public class SelectGameDto {
 
   public void setSize(Integer size) {
     this.size = size;
+  }
+
+  public String getGameName() {
+    return gameName;
+  }
+
+  public void setGameName(String gameName) {
+    this.gameName = gameName;
   }
 }
