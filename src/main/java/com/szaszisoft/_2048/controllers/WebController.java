@@ -30,9 +30,12 @@ public class WebController {
   }
 
   @GetMapping("/")
-  public String getMain(Model model, Game newGame) {
+  public String getMain(@CookieValue(value = "gameId", defaultValue = "0") Long gameId,
+                        Model model,
+                        Game newGame) {
     model.addAttribute("games", gameService.findAll());
     model.addAttribute(newGame);
+    model.addAttribute("gameId", gameId);
     return "index";
   }
 
@@ -53,7 +56,7 @@ public class WebController {
 
   @GetMapping("/game")
   public String getBoard(Model model,
-                         @CookieValue(value = "gameid", defaultValue = "0") Long gameId) {
+                         @CookieValue(value = "gameId", defaultValue = "0") Long gameId) {
     if (gameId == 0) {
       return "redirect:/";
     }
@@ -68,7 +71,7 @@ public class WebController {
 
   @GetMapping("/move/{id}")
   public String getMoveBoard(@PathVariable String id,
-                             @CookieValue(value = "gameid", defaultValue = "0") Long gameId,
+                             @CookieValue(value = "gameId", defaultValue = "0") Long gameId,
                              RedirectAttributes redirectAttributes) {
     if (gameId == 0) {
       return "redirect:/";
@@ -107,7 +110,7 @@ public class WebController {
   }
 
   @GetMapping("/reset")
-  public String getReset(@CookieValue(value = "gameid", defaultValue = "0") Long gameId) {
+  public String getReset(@CookieValue(value = "gameId", defaultValue = "0") Long gameId) {
     if (gameId == 0) {
       return "redirect:/";
     }
@@ -121,7 +124,7 @@ public class WebController {
   }
 
   @GetMapping("/undo")
-  public String getUndo(@CookieValue(value = "gameid", defaultValue = "0") Long gameId) {
+  public String getUndo(@CookieValue(value = "gameId", defaultValue = "0") Long gameId) {
     if (gameId == 0) {
       return "redirect:/";
     }
