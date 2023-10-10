@@ -6,5 +6,5 @@ import java.util.List;
 public interface GameService {
   Game getGameById(long id);
   List<Game> findAll();
-  Game startNewGame(Integer size);
+  Game startNewGame(Integer size, String gameName);
 }

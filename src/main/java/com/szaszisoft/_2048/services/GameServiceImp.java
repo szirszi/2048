@@ -31,7 +31,7 @@ public class GameServiceImp implements GameService {
   }
 
   @Override
-  public Game startNewGame(Integer size) {
+  public Game startNewGame(Integer size, String gameName) {
     Game game = gameRepository.save(new Game());
     Board play = boardService.initializeBoard(size);
     play.setGame(game);
@@ -43,6 +43,7 @@ public class GameServiceImp implements GameService {
     boards.add(play);
     boards.add(undo);
     game.setBoards(boards);
+    game.setGameName(gameName);
     return gameRepository.save(game);
   }
 }
