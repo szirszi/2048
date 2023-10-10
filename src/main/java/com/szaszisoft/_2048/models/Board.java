@@ -219,7 +219,6 @@ public class Board {
         }
       }
     }
-    addNewNumber(2);
   }
 
   public void moveDown() {
