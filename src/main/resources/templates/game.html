@@ -33,7 +33,11 @@
             <br>
             <span th:text="${gameName}"></span>
             <br>
-            <span th:text="${status}"></span>
+            <span th:remove="tag" th:if="${(!canMoveDown && !canMoveUp && !canMoveLeft && !canMoveRight)}">
+                <span class="gameOver">
+                    No more move. Game over.
+                </span>
+            </span>
         </th>
     </tr>
     </thead>

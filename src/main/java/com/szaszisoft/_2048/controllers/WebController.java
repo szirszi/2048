@@ -111,11 +111,6 @@ public class WebController {
       newCellXY = board.addNewNumber(2);
     }
 
-    if (!board.canMoveLeft() && !board.canMoveRight() && !board.canMoveUp() &&
-        !board.canMoveDown()) {
-      redirectAttributes.addFlashAttribute("status", "No more move. Game over.");
-    }
-
     boardService.save(board);
     boardService.save(previous);
     redirectAttributes.addFlashAttribute("newCellX", newCellXY[0]);
