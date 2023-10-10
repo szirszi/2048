@@ -44,7 +44,8 @@ public class WebController {
                          HttpServletResponse httpServletResponse) {
     Long gameId = selectGameDto.getGameId();
     if (gameId == 0) {
-      gameId = gameService.startNewGame(selectGameDto.getSize(), selectGameDto.getGameName()).getId();
+      gameId =
+          gameService.startNewGame(selectGameDto.getSize(), selectGameDto.getGameName()).getId();
     }
     Cookie cookie = new Cookie("gameId", "" + gameId);
     cookie.setHttpOnly(true);
