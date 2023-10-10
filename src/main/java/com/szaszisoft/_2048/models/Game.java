@@ -16,6 +16,7 @@ public class Game {
   private Long id;
   @OneToMany(mappedBy = "game", orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Board> boards;
+  private String gameName;
 
   public Game() {
   }
@@ -38,5 +39,13 @@ public class Game {
 
   public void setBoards(List<Board> boards) {
     this.boards = boards;
+  }
+
+  public String getGameName() {
+    return gameName;
+  }
+
+  public void setGameName(String name) {
+    this.gameName = name;
   }
 }
