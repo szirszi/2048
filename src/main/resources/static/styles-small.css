@@ -1,0 +1,24 @@
+.cell {
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 10px;
+    font-size: large;
+    box-shadow: lightgrey 0 1px 2px 3px;
+}
+
+.cell0, .cell2, .cell4, .cell8, .cell16, .cell32, .cell64 {
+    font-size: xx-large;
+    color: white;
+}
+
+.cell128, .cell256, .cell512 {
+    font-size: x-large;
+    color: black;
+}
+
+.cell1024, .cell2048, .cell4096, .cell8192, .cell16384, .cell32768, .cell65536 {
+    font-size: large;
+    color: black;
+}
