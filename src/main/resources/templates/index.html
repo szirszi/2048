@@ -7,21 +7,31 @@
 </head>
 <body>
 <span th:unless="${games.size() == 0}" th:remove="tag">
-<form method="POST" action="/game" th:object="${selectGameDto}">
-    <label for="games">Select Game</label>
-    <select th:name="gameId" id="games">
-        <option th:each="game:${games}" th:value="${game.getId()}" th:text="${game.getId()}" th:selected="${game.getId()==gameId}"></option>
-    </select>
-    <input type="submit" value="Play this">
-</form>
+    <div class="mainmenuitem">
+        CONTINUE
+        <form method="POST" action="/game" th:object="${selectGameDto}">
+            <label for="games">Select Game</label>
+            <select th:name="gameId" id="games" class="button-small">
+                <option th:each="game:${games}" th:value="${game.getId()}" th:text="|${game.getGameName()}|"
+                th:selected="${game.getId()==gameId}"></option>
+            </select>
+            <input type="submit" value="Play this" class="button-small">
+        </form>
+    </div>
 </span>
-<form method="POST" action="/game" th:object="${selectGameDto}">
-    <input th:name="gameId" type="hidden" value=0>
-    <label for="sizes">Select size if start new game</label>
-    <select th:name="size" id="sizes">
-        <option th:each="size : ${#numbers.sequence(3, 10)}" th:value="${size}" th:text="${size}" th:selected="${size==4}"></option>
-    </select>
-    <input type="submit" value="Play this">
-</form>
+<div class="mainmenuitem">
+    START NEW
+    <form method="POST" action="/game" th:object="${selectGameDto}">
+        <input th:name="gameId" type="hidden" value=0>
+        <label for="gameName">Add name: (required)</label>
+        <input id="gameName" type="text" th:field="${selectGameDto.gameName}" required  class="button-small">
+        <label for="sizes">Select size</label>
+        <select th:name="size" id="sizes"  class="button-small">
+            <option th:each="size : ${#numbers.sequence(3, 10)}" th:value="${size}" th:text="${size}"
+                th:selected="${size==4}"></option>
+        </select>
+        <input type="submit" value="Let's play" class="button-small">
+    </form>
+</div>
 </body>
 </html>

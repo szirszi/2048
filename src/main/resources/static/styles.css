@@ -4,6 +4,10 @@ body {
     background-color: #666666;
 }
 
+label, input {
+    display: block;
+}
+
 td a {display: block;
     position: relative;
     text-align: center;
@@ -31,7 +35,7 @@ button, .button-small {
 
 a, .button-small {
     font-size: unset;
-    margin: 5px;
+    margin: 10px;
     padding: 5px;
     color: black;
     text-decoration: none;
@@ -155,4 +159,13 @@ a:hover {
 
 #newcell {
     background-color: indianred;
+}
+
+.mainmenuitem {
+    border: darkseagreen 1px solid;
+    background-color: darkseagreen;
+    border-radius: 10px;
+    box-shadow: lightgrey 0 1px 2px 3px;
+    padding: 10px;
+    margin: 15px;
 }
