@@ -21,8 +21,8 @@
             <a href="/">
                 <button class="button-small">SELECT GAME</button>
             </a>
-            <a th:href="${canUndo != 0 ? '/undo' : '#'}">
-                <button class="button-small" th:classappend="${canUndo != 0 ? '' : 'disabled-button'}">UNDO LAST MOVE</button>
+            <a th:href="${canUndo == 0 ? '#' : '/undo'}">
+                <button class="button-small" th:classappend="${canUndo == 0 ? 'disabled-button' : ''}">UNDO LAST MOVE</button>
             </a>
         </th>
     </tr>
