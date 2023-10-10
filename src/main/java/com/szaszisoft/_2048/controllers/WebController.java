@@ -128,6 +128,10 @@ public class WebController {
       return "redirect:/";
     }
     Game game = gameService.getGameById(gameId);
+    if (game == null) {
+      return "redirect:/";
+    }
+
     Board board = selectBoard(game, BoardType.PLAY);
     Board previous = selectBoard(game, BoardType.UNDO);
     previous.populate(board);
@@ -142,6 +146,10 @@ public class WebController {
       return "redirect:/";
     }
     Game game = gameService.getGameById(gameId);
+    if (game == null) {
+      return "redirect:/";
+    }
+
     Board board = selectBoard(game, BoardType.PLAY);
     Board previous = selectBoard(game, BoardType.UNDO);
     board.populate(previous);
