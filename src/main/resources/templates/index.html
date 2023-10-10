@@ -9,7 +9,7 @@
 <form method="POST" action="/game" th:object="${selectGameDto}">
     <label for="games">Select Game</label>
     <select th:name="gameId" id="games">
-        <option th:each="game:${games}" th:value="${game.getId()}" th:text="${game.getId()}"></option>
+        <option th:each="game:${games}" th:value="${game.getId()}" th:text="${game.getId()}" th:selected="${game.getId()==gameId}"></option>
     </select>
     <input type="submit" value="Play this">
 </form>
@@ -20,7 +20,7 @@
 
     <label for="sizes">Select size if start new game</label>
     <select th:name="size" id="sizes">
-        <option th:each="size : ${#numbers.sequence(3, 10)}" th:value="${size}" th:text="${size}"></option>
+        <option th:each="size : ${#numbers.sequence(3, 10)}" th:value="${size}" th:text="${size}" th:selected="${size==4}"></option>
     </select>
     <input type="submit" value="Play this">
 </form>
