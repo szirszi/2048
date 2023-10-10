@@ -17,7 +17,6 @@ public class BoardRow {
   private Long id;
   @OneToMany(mappedBy = "boardRow", orphanRemoval = true, cascade = CascadeType.ALL)
   private List<BoardCell> row;
-  private Integer size;
   @ManyToOne
   private Board board;
 
@@ -25,18 +24,9 @@ public class BoardRow {
     row = new ArrayList<BoardCell>();
   }
 
-  public BoardRow(List<BoardCell> row, Integer size, Board board) {
+  public BoardRow(List<BoardCell> row, Board board) {
     this.row = row;
-    this.size = size;
     this.board = board;
-  }
-
-  public Integer getSize() {
-    return size;
-  }
-
-  public void setSize(Integer size) {
-    this.size = size;
   }
 
   public Board getBoard() {
@@ -62,12 +52,15 @@ public class BoardRow {
   public void setRow(List<BoardCell> row) {
     this.row = row;
   }
+
   public void addToRow(BoardCell boardCell) {
     row.add(boardCell);
   }
+
   public void setRowItem(Integer index, BoardCell boardCell) {
     row.set(index, boardCell);
   }
+
   public BoardCell getRowItem(Integer index) {
     return row.get(index);
   }

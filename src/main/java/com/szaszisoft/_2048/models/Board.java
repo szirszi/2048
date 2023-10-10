@@ -30,7 +30,7 @@ public class Board {
     playBoard = new ArrayList<BoardRow>();
     this.size = size;
     for (int y = 0; y < size; y++) {
-      BoardRow boardRow = new BoardRow(new ArrayList<BoardCell>(), size, this);
+      BoardRow boardRow = new BoardRow(new ArrayList<BoardCell>(), this);
       for (int x = 0; x < size; x++) {
         BoardCell boardCell = new BoardCell();
         boardCell.setBoardRow(boardRow);
