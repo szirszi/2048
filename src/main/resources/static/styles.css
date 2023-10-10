@@ -152,3 +152,7 @@ a:hover {
 .cell65536 {
     color: #444;
 }
+
+#newcell {
+    background-color: indianred;
+}

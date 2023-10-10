@@ -122,9 +122,9 @@ public class Board {
     return false;
   }
 
-  public void addNewNumber(Integer number) {
+  public Integer[] addNewNumber(Integer number) {
     if (allContainsNumber()) {
-      return;
+      return null;
     }
     int x;
     int y;
@@ -135,6 +135,10 @@ public class Board {
       y = (y < 0 ? 0 : (y >= size ? size - 1 : y));
     } while (getElementXY(x, y) != 0);
     setElementXY(x, y, number);
+    Integer[] newCoordinatesXY = new Integer[2];
+    newCoordinatesXY[0]=x;
+    newCoordinatesXY[1]=y;
+    return newCoordinatesXY;
   }
 
   public String representAsString() {

@@ -62,8 +62,8 @@
             <table>
                 <tr th:each="row, y:${board.getPlayBoardAsArray()}">
                     <td th:each="column, x:${board.getPlayBoardAsArray()}" class="cell"
-                        th:classappend="|cell${board.getElementXY(x.index,y.index)}|">
-                        <span th:text="${board.getElementXY(x.index,y.index)}"></span>
+                        th:classappend="|cell${board.getElementXY(x.index,y.index)}|" th:id="${(x.index==newCellX && y.index==newCellY) ? 'newcell' : ''}">
+                        <span th:text="${board.getElementXY(x.index,y.index)}" th:remove="tag"></span>
                     </td>
                 </tr>
             </table>
