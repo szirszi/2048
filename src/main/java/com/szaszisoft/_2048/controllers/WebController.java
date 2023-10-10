@@ -95,25 +95,31 @@ public class WebController {
     if (id.equals("up") && board.canMoveUp()) {
       previous.populate(board);
       board.moveUp();
+      newCellXY = board.addNewNumber(2);
     }
 
     if (id.equals("down") && board.canMoveDown()) {
       previous.populate(board);
       board.moveDown();
+      newCellXY = board.addNewNumber(2);
     }
 
     if (id.equals("right") && board.canMoveRight()) {
       previous.populate(board);
       board.moveRight();
+      newCellXY = board.addNewNumber(2);
     }
 
     if (id.equals("left") && board.canMoveLeft()) {
       previous.populate(board);
       board.moveLeft();
+      newCellXY = board.addNewNumber(2);
     }
 
     boardService.save(board);
     boardService.save(previous);
+    redirectAttributes.addFlashAttribute("newCellX", newCellXY[0]);
+    redirectAttributes.addFlashAttribute("newCellY", newCellXY[1]);
     return "redirect:/game";
   }
 
