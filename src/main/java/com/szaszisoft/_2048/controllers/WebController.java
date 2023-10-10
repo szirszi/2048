@@ -76,6 +76,11 @@ public class WebController {
       return "redirect:/";
     }
     Game game = gameService.getGameById(gameId);
+
+    if (game == null) {
+      return "redirect:/";
+    }
+
     Board board = selectBoard(game, BoardType.PLAY);
 
     if (!board.canMoveLeft() && !board.canMoveRight() && !board.canMoveUp() &&
