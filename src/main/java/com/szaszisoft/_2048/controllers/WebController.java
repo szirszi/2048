@@ -77,6 +77,14 @@ public class WebController {
     }
     Game game = gameService.getGameById(gameId);
     Board board = selectBoard(game, BoardType.PLAY);
+
+    if (!board.canMoveLeft() && !board.canMoveRight() && !board.canMoveUp() &&
+        !board.canMoveDown()) {
+      redirectAttributes.addFlashAttribute("status", "No more move. Game over.");
+      return "redirect:/game";
+    }
+
+    Integer[] newCellXY = new Integer[2];
     Board previous = selectBoard(game, BoardType.UNDO);
 
     if (id.equals("up") && board.canMoveUp()) {
@@ -99,10 +107,6 @@ public class WebController {
       board.moveLeft();
     }
 
-    if (!board.canMoveLeft() && !board.canMoveRight() && !board.canMoveUp() &&
-        !board.canMoveDown()) {
-      redirectAttributes.addFlashAttribute("status", "No more move. Game over.");
-    }
     boardService.save(board);
     boardService.save(previous);
     return "redirect:/game";
