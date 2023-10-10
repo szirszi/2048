@@ -65,6 +65,7 @@ public class WebController {
     }
     Board board = selectBoard(game, BoardType.PLAY);
     model.addAttribute("board", board);
+    model.addAttribute("gameName", game.getGameName());
     return "game";
   }
 
@@ -119,6 +120,7 @@ public class WebController {
     boardService.save(previous);
     redirectAttributes.addFlashAttribute("newCellX", newCellXY[0]);
     redirectAttributes.addFlashAttribute("newCellY", newCellXY[1]);
+    redirectAttributes.addFlashAttribute("gameName", game.getGameName());
     return "redirect:/game";
   }
 
