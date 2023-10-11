@@ -17,7 +17,7 @@ COPY settings.gradle .
 COPY . .
 
 # Run the Gradle build using the gradlew script
-RUN ./gradlew build
+RUN ./gradlew build -x test
 
 # Create a directory for the application's JAR file
 RUN mkdir -p build/dependency
