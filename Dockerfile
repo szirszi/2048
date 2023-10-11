@@ -6,7 +6,7 @@ WORKDIR /workspace/app
 
 # Copy the Gradle wrapper files (gradlew and gradle-wrapper.properties)
 COPY gradlew .
-RUN chmod +x gradlew
+
 COPY gradle/wrapper/* gradle/wrapper/
 
 # Copy the Gradle build files (build.gradle and settings.gradle)
@@ -16,6 +16,8 @@ COPY settings.gradle .
 # Copy the entire project (excluding files listed in .dockerignore) into the container
 COPY . .
 
+# Set gradlew executeable
+RUN chmod +x gradlew
 # Run the Gradle build using the gradlew script
 RUN ./gradlew build -x test
 
