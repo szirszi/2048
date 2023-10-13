@@ -67,6 +67,7 @@ public class WebController {
     Board board = selectBoard(game, BoardType.PLAY);
     model.addAttribute("board", board);
     model.addAttribute("gameName", game.getGameName());
+    model.addAttribute("jvmRoute", System.getenv("TOMCAT_JVMROUTE"));
     return "game";
   }
 
