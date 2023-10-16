@@ -22,13 +22,14 @@ public class AjpConfig {
     Connector connector = new Connector("AJP/1.3");
     connector.setScheme("http");
     connector.setPort(ajpPort); // Set your AJP port as needed
-    connector.setSecure(false);
+    connector.setSecure(true);
     connector.setAllowTrace(false);
+
 
     // If you need to configure AJP-specific settings, you can access the protocol handler
     AbstractAjpProtocol protocol = (AbstractAjpProtocol) connector.getProtocolHandler();
-    protocol.setSecretRequired(false); // For example, setting secretRequired
-
+    protocol.setSecretRequired(true); // For example, setting secretRequired
+    protocol.setSecret("verysecret");
     return connector;
   }
 
