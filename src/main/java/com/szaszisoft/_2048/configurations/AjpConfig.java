@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AjpConfig {
-
+  // Define your AJP port here, for example:
+  private int ajpPort = Integer.parseInt(System.getenv("AJP_PORT"));
   @Bean
   public WebServerFactoryCustomizer<TomcatServletWebServerFactory> servletContainer2() {
     return server -> {
@@ -22,17 +23,14 @@ public class AjpConfig {
     Connector connector = new Connector("AJP/1.3");
     connector.setScheme("http");
     connector.setPort(ajpPort); // Set your AJP port as needed
-    connector.setSecure(true);
+    connector.setSecure(false);
     connector.setAllowTrace(false);
 
 
     // If you need to configure AJP-specific settings, you can access the protocol handler
     AbstractAjpProtocol protocol = (AbstractAjpProtocol) connector.getProtocolHandler();
-    protocol.setSecretRequired(true); // For example, setting secretRequired
-    protocol.setSecret("verysecret");
+    protocol.setSecretRequired(false); // For example, setting secretRequired
+    // protocol.setSecret("verysecret");
     return connector;
   }
-
-  // Define your AJP port here, for example:
-  private int ajpPort = 8009;
 }
