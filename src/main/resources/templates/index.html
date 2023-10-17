@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{styles.css}">
 </head>
 <body>
+<p th:text="${gameName}"></p> on <p th:text="${jvmRoute}"></p>
 <span th:unless="${games.size() == 0}" th:remove="tag">
     <div class="mainmenuitem">
         CONTINUE

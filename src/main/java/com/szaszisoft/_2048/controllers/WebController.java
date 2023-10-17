@@ -36,6 +36,7 @@ public class WebController {
     model.addAttribute("games", gameService.findAll());
     model.addAttribute(selectGameDto);
     model.addAttribute("gameId", gameId);
+    model.addAttribute("jvmRoute", System.getenv("TOMCAT_JVMROUTE"));
     return "index";
   }
 
