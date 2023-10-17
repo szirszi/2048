@@ -1,24 +1,37 @@
-/*
 package com.szaszisoft._2048.configurations;
 
-import org.apache.coyote.ajp.AbstractAjpProtocol;
+import org.apache.catalina.Manager;
 import org.apache.catalina.connector.Connector;
+import org.apache.catalina.session.ManagerBase;
+import org.apache.catalina.session.StandardManager;
+import org.apache.coyote.ajp.AbstractAjpProtocol;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AjpConfig {
-  // Define your AJP port here, for example:
+public class TomcatAjpConfig {
+
   private int ajpPort = Integer.parseInt(System.getenv("AJP_PORT"));
 
   @Bean
-  public WebServerFactoryCustomizer<TomcatServletWebServerFactory> servletContainer2() {
+  public WebServerFactoryCustomizer<TomcatServletWebServerFactory> servletContainer() {
     return server -> {
       if (server instanceof TomcatServletWebServerFactory) {
-        ((TomcatServletWebServerFactory) server).addAdditionalTomcatConnectors(ajpConnector());
+        server.addAdditionalTomcatConnectors(ajpConnector());
       }
+
+      server.addContextCustomizers(context -> {
+        Manager manager = context.getManager();
+        if (manager == null) {
+          manager = new StandardManager();
+          context.setManager(manager);
+        }
+        ((ManagerBase) context.getManager())
+            .getEngine()
+            .setJvmRoute(System.getenv("TOMCAT_JVMROUTE"));
+      });
     };
   }
 
@@ -35,4 +48,3 @@ public class AjpConfig {
     return connector;
   }
 }
-*/

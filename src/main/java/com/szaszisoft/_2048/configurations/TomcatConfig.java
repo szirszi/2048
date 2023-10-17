@@ -1,3 +1,4 @@
+/*
 package com.szaszisoft._2048.configurations;
 
 import org.apache.catalina.Manager;
@@ -25,3 +26,4 @@ public class TomcatConfig {
     };
   }
 }
+*/
