@@ -38,7 +38,7 @@ public class TomcatAjpConfig {
   private Connector ajpConnector() {
     Connector connector = new Connector("AJP/1.3");
     connector.setScheme("http");
-    connector.setPort(ajpPort);
+    connector.setPort(8009);
     connector.setSecure(false);
     connector.setAllowTrace(false);
 
