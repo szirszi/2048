@@ -41,3 +41,5 @@ ENTRYPOINT ["java", "-jar", "_2048-0.0.1-SNAPSHOT.jar"]
 
 EXPOSE 8080/tcp
 EXPOSE 8080/udp
+EXPOSE 8009/tcp
+EXPOSE 8009/udp
