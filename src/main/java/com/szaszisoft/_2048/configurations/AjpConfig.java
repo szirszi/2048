@@ -1,4 +1,5 @@
 package com.szaszisoft._2048.configurations;
+
 import org.apache.coyote.ajp.AbstractAjpProtocol;
 import org.apache.catalina.connector.Connector;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class AjpConfig {
   // Define your AJP port here, for example:
   private int ajpPort = Integer.parseInt(System.getenv("AJP_PORT"));
+
   @Bean
   public WebServerFactoryCustomizer<TomcatServletWebServerFactory> servletContainer2() {
     return server -> {
@@ -22,12 +24,10 @@ public class AjpConfig {
   private Connector ajpConnector() {
     Connector connector = new Connector("AJP/1.3");
     connector.setScheme("http");
-    connector.setPort(ajpPort); // Set your AJP port as needed
+    connector.setPort(ajpPort);
     connector.setSecure(false);
     connector.setAllowTrace(false);
 
-
-    // If you need to configure AJP-specific settings, you can access the protocol handler
     AbstractAjpProtocol protocol = (AbstractAjpProtocol) connector.getProtocolHandler();
     protocol.setSecretRequired(false); // For example, setting secretRequired
     // protocol.setSecret("verysecret");

@@ -20,11 +20,7 @@ public class TomcatConfig {
           manager = new StandardManager();
           context.setManager(manager);
         }
-        String jvmRoute = ((ManagerBase) context.getManager()).getEngine().getJvmRoute();
-        System.out.println("Current JvmRoute: " + jvmRoute);
         ((ManagerBase) context.getManager()).getEngine().setJvmRoute(System.getenv("TOMCAT_JVMROUTE"));
-        jvmRoute = ((ManagerBase) context.getManager()).getEngine().getJvmRoute();
-        System.out.println("Current JvmRoute: " + jvmRoute);
       });
     };
   }
