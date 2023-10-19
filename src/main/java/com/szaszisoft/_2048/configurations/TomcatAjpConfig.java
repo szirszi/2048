@@ -1,5 +1,7 @@
 package com.szaszisoft._2048.configurations;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import org.apache.catalina.Manager;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.session.ManagerBase;
@@ -45,6 +47,13 @@ public class TomcatAjpConfig {
     AbstractAjpProtocol protocol = (AbstractAjpProtocol) connector.getProtocolHandler();
     protocol.setSecretRequired(false); // For example, setting secretRequired
     // protocol.setSecret("verysecret");
+    try {
+      protocol.setAddress(InetAddress.getByName( "0.0.0.0" ) );
+    } catch (UnknownHostException e) {
+      throw new RuntimeException(e);
+    }
+
+
     return connector;
   }
 }
