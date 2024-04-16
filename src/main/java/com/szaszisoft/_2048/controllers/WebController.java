@@ -6,6 +6,7 @@ import com.szaszisoft._2048.models.BoardType;
 import com.szaszisoft._2048.models.Game;
 import com.szaszisoft._2048.services.BoardService;
 import com.szaszisoft._2048.services.GameService;
+import io.micrometer.core.annotation.Timed;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,7 @@ public class WebController {
   }
 
   @GetMapping("/move/{id}")
+  @Timed(value = "move.controller", description = "Time taken to move")
   public String getMoveBoard(@PathVariable String id,
                              @CookieValue(value = "gameId", defaultValue = "0") Long gameId,
                              RedirectAttributes redirectAttributes) {
