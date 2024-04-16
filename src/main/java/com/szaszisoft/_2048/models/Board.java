@@ -226,7 +226,15 @@ public class Board {
   }
 
   public void rotateLeft() {
-    Integer[][] current = getPlayBoardAsArray();
+
+    Integer[][] current = new Integer[size][size];
+    for (int y = 0; y < size; y++) {
+      BoardRow currentRow = playBoard.get(y);
+      for (int x = 0; x < size; x++) {
+        current[y][x] = currentRow.getRow().get(x).getCellValue();
+      }
+    }
+
     Integer[][] leftRotated = new Integer[size][size];
     for (int y = 0; y < size; y++) {
       for (int x = 0; x < size; x++) {
@@ -244,28 +252,14 @@ public class Board {
     }
   }
 
-  public Integer[][] playBoardTo2DArray() {
-    Integer[][] outputArray = new Integer[size][size];
-    for (int y = 0; y < size; y++) {
-      BoardRow currentRow = playBoard.get(y);
-      for (int x = 0; x < size; x++) {
-        outputArray[y][x] = currentRow.getRow().get(x).getCellValue();
-      }
-
-    }
-    return outputArray;
-  }
-
-  public Board arrayToBoard(Integer[][] boardAsArray) {
     for (int y = 0; y < size; y++) {
       BoardRow currentRow = playBoard.get(y);
       for (int x = 0; x < size; x++) {
         BoardCell rowItem = currentRow.getRowItem(x);
-        rowItem.setCellValue(boardAsArray[y][x]);
+        rowItem.setCellValue(leftRotated[y][x]);
       }
       playBoard.set(y, currentRow);
     }
-    return this;
   }
 
   public List<BoardRow> arrayToPlayBoard(Integer[][] boardAsArray) {
