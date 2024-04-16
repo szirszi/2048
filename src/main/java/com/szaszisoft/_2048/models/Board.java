@@ -23,14 +23,14 @@ public class Board {
   private BoardType boardType;
 
   public Board() {
-    playBoard = new ArrayList<BoardRow>();
+    playBoard = new ArrayList<>();
   }
 
   public Board(Integer size) {
-    playBoard = new ArrayList<BoardRow>();
+    playBoard = new ArrayList<>();
     this.size = size;
     for (int y = 0; y < size; y++) {
-      BoardRow boardRow = new BoardRow(new ArrayList<BoardCell>(), this);
+      BoardRow boardRow = new BoardRow(new ArrayList<>(), this);
       for (int x = 0; x < size; x++) {
         BoardCell boardCell = new BoardCell();
         boardCell.setBoardRow(boardRow);
