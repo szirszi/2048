@@ -241,16 +241,6 @@ public class Board {
         leftRotated[y][x] = current[x][size - 1 - y];
       }
     }
-    playBoard = arrayToPlayBoard(leftRotated);
-  }
-
-  public void populate(Board otherBoard) {
-    for (int x = 0; x < size; x++) {
-      for (int y = 0; y < size; y++) {
-        setElementXY(x, y, otherBoard.getElementXY(x, y));
-      }
-    }
-  }
 
     for (int y = 0; y < size; y++) {
       BoardRow currentRow = playBoard.get(y);
@@ -262,12 +252,11 @@ public class Board {
     }
   }
 
-  public List<BoardRow> arrayToPlayBoard(Integer[][] boardAsArray) {
-    Board board = arrayToBoard(boardAsArray);
-    return board.getPlayBoard();
-  }
-
-  public void addRowToPlayBoard(BoardRow boardRow) {
-    playBoard.add(boardRow);
+  public void populate(Board otherBoard) {
+    for (int x = 0; x < size; x++) {
+      for (int y = 0; y < size; y++) {
+        setElementXY(x, y, otherBoard.getElementXY(x, y));
+      }
+    }
   }
 }
