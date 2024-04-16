@@ -55,33 +55,12 @@ public class Board {
     return playBoard;
   }
 
-  public void setPlayBoard(List<BoardRow> playBoard) {
-    this.playBoard = playBoard;
-  }
-
-  public void setPlayBoardFromArray(List<BoardRow> playBoard) {
-    this.playBoard = playBoard;
-  }
-
-  public Integer[][] getPlayBoardAsArray() {
-    return this.playBoardTo2DArray();
-  }
-
-  public void setPlayBoardFromArray(Integer[][] playBoard) {
-
-    this.playBoard = arrayToPlayBoard(playBoard);
-  }
-
   public Integer getSize() {
     return size;
   }
 
   public void setSize(Integer size) {
     this.size = size;
-  }
-
-  public Game getGame() {
-    return game;
   }
 
   public void setGame(Game game) {
