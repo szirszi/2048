@@ -54,16 +54,8 @@ public class Board {
     this.id = id;
   }
 
-  public List<BoardRow> getPlayBoard() {
-    return playBoard;
-  }
-
   public Integer getSize() {
     return size;
-  }
-
-  public void setSize(Integer size) {
-    this.size = size;
   }
 
   public void setGame(Game game) {
