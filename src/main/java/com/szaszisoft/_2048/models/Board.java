@@ -147,33 +147,45 @@ public class Board {
   }
 
   public boolean canMoveDown() {
-    boolean canMoveDown;
-    rotateLeft();
-    rotateLeft();
-    canMoveDown = canMoveUp();
-    rotateLeft();
-    rotateLeft();
-    return canMoveDown;
+    for (int x = 0; x < size; x++) {
+      for (int y = size - 2 ; y >= 0; y--) {
+        if (getElementXY(x, y + 1).equals(0) && !getElementXY(x, y).equals(0)) {
+          return true;
+        }
+        if (getElementXY(x, y).equals(getElementXY(x, y + 1)) && !getElementXY(x, y).equals(0)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public boolean canMoveLeft() {
-    boolean canMoveLeft;
-    rotateLeft();
-    rotateLeft();
-    rotateLeft();
-    canMoveLeft = canMoveUp();
-    rotateLeft();
-    return canMoveLeft;
+    for (int y = 0; y < size; y++) {
+      for (int x = size - 2 ; x >= 0; x--) {
+        if (getElementXY(x, y).equals(0) && !getElementXY(x + 1, y).equals(0)) {
+          return true;
+        }
+        if (getElementXY(x, y).equals(getElementXY(x + 1, y)) && !getElementXY(x, y).equals(0)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public boolean canMoveRight() {
-    boolean canMoveRight;
-    rotateLeft();
-    canMoveRight = canMoveUp();
-    rotateLeft();
-    rotateLeft();
-    rotateLeft();
-    return canMoveRight;
+    for (int y = 0; y < size; y++) {
+      for (int x = 0; x < size - 1; x++) {
+        if (getElementXY(x + 1, y).equals(0) && !getElementXY(x, y).equals(0)) {
+          return true;
+        }
+        if (getElementXY(x, y).equals(getElementXY(x + 1, y)) && !getElementXY(x, y).equals(0)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public void moveUp() {
@@ -201,28 +213,76 @@ public class Board {
   }
 
   public void moveDown() {
-    rotateLeft();
-    rotateLeft();
-    moveUp();
-    rotateLeft();
-    rotateLeft();
+    for (int x = 0; x < size; x++) {
+      List<Integer> tempList = new ArrayList<>();
+      for (int y = 0; y < size; y++) {
+        if (getElementXY(x, y) != 0) {
+          tempList.add(getElementXY(x, y));
+        }
+      }
+      for (int i = tempList.size() - 2; i >= 0; i--) {
+        if (tempList.get(i).equals(tempList.get(i + 1))) {
+          tempList.set(i, tempList.get(i) * 2);
+          tempList.remove(i + 1);
+        }
+      }
+      for (int y = size - 1, i = tempList.size() - 1; y >= 0; y--, i --) {
+        if (i >= 0) {
+          setElementXY(x, y, tempList.get(i));
+        } else {
+          setElementXY(x, y, 0);
+        }
+      }
+    }
   }
 
   public void moveLeft() {
-
-    rotateLeft();
-    rotateLeft();
-    rotateLeft();
-    moveUp();
-    rotateLeft();
+    for (int y = 0; y < size; y++) {
+      List<Integer> tempList = new ArrayList<>();
+      for (int x = 0; x < size; x++) {
+        if (getElementXY(x, y) != 0) {
+          tempList.add(getElementXY(x, y));
+        }
+      }
+      for (int i = 1; i < tempList.size(); i++) {
+        if (tempList.get(i).equals(tempList.get(i - 1))) {
+          tempList.set(i - 1, tempList.get(i) * 2);
+          tempList.remove(i);
+        }
+      }
+      for (int x = 0; x < size; x++) {
+        if (x < tempList.size()) {
+          setElementXY(x, y, tempList.get(x));
+        } else {
+          setElementXY(x, y, 0);
+        }
+      }
+    }
   }
 
   public void moveRight() {
-    rotateLeft();
-    moveUp();
-    rotateLeft();
-    rotateLeft();
-    rotateLeft();
+    for (int y = 0; y < size; y++) {
+      List<Integer> tempList = new ArrayList<>();
+      for (int x = 0; x < size; x++) {
+        if (getElementXY(x, y) != 0) {
+          tempList.add(getElementXY(x, y));
+        }
+      }
+
+      for (int i = tempList.size() - 1; i > 0; i--) {
+        if (tempList.get(i).equals(tempList.get(i - 1))) {
+          tempList.set(i, tempList.get(i) * 2);
+          tempList.remove(i - 1);
+          tempList.add(0,0);
+        }
+      }
+      for (int x = size - 1, i = tempList.size() - 1; i >= 0; x--, i--) {
+        setElementXY(x, y, tempList.get(i));
+      }
+      for (int x = 0; x < size - tempList.size(); x++) {
+        setElementXY(x, y, 0);
+      }
+    }
   }
 
   public void populate(Board otherBoard) {
