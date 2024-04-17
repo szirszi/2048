@@ -33,6 +33,7 @@
             <br>
             <span th:text="${gameName}"></span> on <span th:text="${jvmRoute}"></span>
             <br>
+            <span class="score" th:text="|SCORE: ${board.getScore()}|"></span>
             <span th:remove="tag" th:if="${(!canMoveDown && !canMoveUp && !canMoveLeft && !canMoveRight)}">
                 <span class="gameOver">
                     No more move. Game over.
