@@ -21,14 +21,17 @@ public class Board {
   private Game game;
   private Integer size;
   private BoardType boardType;
+  private int score;
 
   public Board() {
     playBoard = new ArrayList<>();
+    score = 0;
   }
 
   public Board(Integer size) {
     playBoard = new ArrayList<>();
     this.size = size;
+    score = 0;
     for (int y = 0; y < size; y++) {
       BoardRow boardRow = new BoardRow(new ArrayList<>(), this);
       for (int x = 0; x < size; x++) {
@@ -83,6 +86,10 @@ public class Board {
     BoardRow boardRow = playBoard.get(y);
     BoardCell rowItem = boardRow.getRowItem(x);
     rowItem.setCellValue(value);
+  }
+
+  public int getScore() {
+    return score;
   }
 
   boolean allContainsNumber() {
@@ -199,6 +206,7 @@ public class Board {
       for (int i = 1; i < tempList.size(); i++) {
         if (tempList.get(i).equals(tempList.get(i - 1))) {
           tempList.set(i - 1, tempList.get(i) * 2);
+          score += tempList.get(i - 1);
           tempList.remove(i);
         }
       }
@@ -223,6 +231,7 @@ public class Board {
       for (int i = tempList.size() - 2; i >= 0; i--) {
         if (tempList.get(i).equals(tempList.get(i + 1))) {
           tempList.set(i, tempList.get(i) * 2);
+          score += tempList.get(i);
           tempList.remove(i + 1);
         }
       }
@@ -247,6 +256,7 @@ public class Board {
       for (int i = 1; i < tempList.size(); i++) {
         if (tempList.get(i).equals(tempList.get(i - 1))) {
           tempList.set(i - 1, tempList.get(i) * 2);
+          score += tempList.get(i - 1);
           tempList.remove(i);
         }
       }
@@ -272,6 +282,7 @@ public class Board {
       for (int i = tempList.size() - 1; i > 0; i--) {
         if (tempList.get(i).equals(tempList.get(i - 1))) {
           tempList.set(i, tempList.get(i) * 2);
+          score += tempList.get(i);
           tempList.remove(i - 1);
           tempList.add(0,0);
         }
@@ -291,5 +302,6 @@ public class Board {
         setElementXY(x, y, otherBoard.getElementXY(x, y));
       }
     }
+    score = otherBoard.score;
   }
 }
