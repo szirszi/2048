@@ -135,7 +135,7 @@ public class Board {
   public boolean canMoveUp() {
     for (int x = 0; x < size; x++) {
       for (int y = 0; y < size - 1; y++) {
-        if (getElementXY(x, y).equals(0) && getElementXY(x, y + 1) != 0) {
+        if (getElementXY(x, y).equals(0) && !getElementXY(x, y + 1).equals(0)) {
           return true;
         }
         if (getElementXY(x, y).equals(getElementXY(x, y + 1)) && !getElementXY(x, y).equals(0)) {
