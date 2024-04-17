@@ -70,6 +70,9 @@ public class WebController {
     model.addAttribute("board", board);
     model.addAttribute("gameName", game.getGameName());
     model.addAttribute("jvmRoute", System.getenv("TOMCAT_JVMROUTE"));
+
+    System.out.println(board.representAsString());
+    System.out.println("SCORE = " + board.getScore());
     return "game";
   }
 
