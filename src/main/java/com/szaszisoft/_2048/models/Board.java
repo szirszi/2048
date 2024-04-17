@@ -225,33 +225,6 @@ public class Board {
     rotateLeft();
   }
 
-  public void rotateLeft() {
-
-    Integer[][] current = new Integer[size][size];
-    for (int y = 0; y < size; y++) {
-      BoardRow currentRow = playBoard.get(y);
-      for (int x = 0; x < size; x++) {
-        current[y][x] = currentRow.getRow().get(x).getCellValue();
-      }
-    }
-
-    Integer[][] leftRotated = new Integer[size][size];
-    for (int y = 0; y < size; y++) {
-      for (int x = 0; x < size; x++) {
-        leftRotated[y][x] = current[x][size - 1 - y];
-      }
-    }
-
-    for (int y = 0; y < size; y++) {
-      BoardRow currentRow = playBoard.get(y);
-      for (int x = 0; x < size; x++) {
-        BoardCell rowItem = currentRow.getRowItem(x);
-        rowItem.setCellValue(leftRotated[y][x]);
-      }
-      playBoard.set(y, currentRow);
-    }
-  }
-
   public void populate(Board otherBoard) {
     for (int x = 0; x < size; x++) {
       for (int y = 0; y < size; y++) {
